@@ -32,7 +32,7 @@
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         local lspconfig = require("lspconfig")
-        local servers = { "pyright", "gopls", "texlab", "clangd", "svelte", "ts_ls", "lua_ls", "jsonls" }
+        local servers = { "clangd" }
 
         local on_attach = function()
             vim.keymap.set("n", "gd", function()
@@ -259,3 +259,22 @@ IncludeCategories:
 CommentPragmas: 'Keep'
 AlignConsecutiveDeclarations: false
 ```
+
+#### Keybinds
+- **`gd`**: Go to definition.
+  - **Action**: Jumps to the location where the function, variable, or symbol is defined.
+
+- **`gi`**: Go to implementation.
+  - **Action**: Jumps to the implementation of the symbol under the cursor.
+
+- **`gh`**: Show hover information.
+  - **Action**: Displays a popup with type or documentation info about the symbol under the cursor.
+
+- **`gD`**: Show diagnostics.
+  - **Action**: Opens a floating window with diagnostics for the current line, making it easy to identify issues.
+
+- **`gr`**: Show references.
+  - **Action**: Lists all references to the symbol under the cursor, useful for tracking where and how it's used.
+
+- **`ga`**: Show code actions.
+  - **Action**: Opens a menu with available actions (like quick fixes or refactoring options) based on the context.

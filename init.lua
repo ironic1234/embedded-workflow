@@ -15,9 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Set leader key
-vim.g.mapleader = " "
-
 -- Load lazy.nvim
 require("lazy").setup({
     -- Mason setup
@@ -48,7 +45,7 @@ require("lazy").setup({
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local lspconfig = require("lspconfig")
-            local servers = { "pyright", "gopls", "texlab", "clangd", "svelte", "ts_ls", "lua_ls", "jsonls" }
+            local servers = { "clangd" }
 
             local on_attach = function()
                 vim.keymap.set("n", "gd", function()
