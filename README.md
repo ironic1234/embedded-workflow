@@ -25,6 +25,74 @@
     end,
 },
 
+-- LSP configuration
+{
+    "neovim/nvim-lspconfig",
+    dependencies = { "williamboman/mason-lspconfig.nvim" },
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+        local lspconfig = require("lspconfig")
+        local servers = { "pyright", "gopls", "texlab", "clangd", "svelte", "ts_ls", "lua_ls", "jsonls" }
+
+        local on_attach = function()
+            vim.keymap.set("n", "gd", function()
+                vim.lsp.buf.definition()
+            end)
+            vim.keymap.set("n", "gi", function()
+                vim.lsp.buf.implementation()
+            end)
+            vim.keymap.set("n", "gh", function()
+                vim.lsp.buf.hover()
+            end)
+            vim.keymap.set("n", "gD", function()
+                vim.diagnostic.open_float()
+            end)
+            vim.keymap.set("n", "gr", function()
+                vim.lsp.buf.references()
+            end)
+            vim.keymap.set("n", "ga", function()
+                vim.lsp.buf.code_action()
+            end)
+        end
+
+        -- Specify how the border looks like
+        local border = {
+            { "┌", "FloatBorder" },
+            { "─", "FloatBorder" },
+            { "┐", "FloatBorder" },
+            { "│", "FloatBorder" },
+            { "┘", "FloatBorder" },
+            { "─", "FloatBorder" },
+            { "└", "FloatBorder" },
+            { "│", "FloatBorder" },
+        }
+
+        -- Add the border on hover and on signature help popup window
+        local handlers = {
+            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+            ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+        }
+
+        -- Add border to the diagnostic popup window
+        vim.diagnostic.config({
+            virtual_text = {
+                prefix = "■ ", -- Could be '●', '▎', 'x', '■', , 
+            },
+            float = {
+                border = border,
+            },
+        })
+
+        for _, server in ipairs(servers) do
+            lspconfig[server].setup({
+                on_attach = on_attach,
+                handlers = handlers,
+            })
+        end
+    end,
+},
+
+
 -- Completion plugins
 {
     "hrsh7th/nvim-cmp",
