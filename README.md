@@ -276,9 +276,9 @@ AlignConsecutiveDeclarations: false
 - **`gr`**: Show references.
   - **Action**: Lists all references to the symbol under the cursor, useful for tracking where and how it's used.
 
+- **`ga`**: Show code actions.
+  - **Action**: Opens a menu with available actions (like quick fixes or refactoring options) based on the context.
+
 #### Example config
 There is an example config in `init.lua`
 You should probably add some of your own stuff like theme or line numbers
-
-- **`ga`**: Show code actions.
-  - **Action**: Opens a menu with available actions (like quick fixes or refactoring options) based on the context.
