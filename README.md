@@ -278,3 +278,7 @@ AlignConsecutiveDeclarations: false
 
 - **`ga`**: Show code actions.
   - **Action**: Opens a menu with available actions (like quick fixes or refactoring options) based on the context.
+
+#### Example config
+There is an example config in `init.lua`
+You should probably add some of your own stuff like theme or line numbers
